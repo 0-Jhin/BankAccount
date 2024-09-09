@@ -29,8 +29,16 @@ public class BankAccountService {
     @Transactional
     public void create(BankAccountCreateRequest request) throws IOException {
         BankAccount bankAccount = createBankAccount(request);
+        String keyword = request.accountNumber();
+        validateDuplicate(keyword);
         bankAccountRepository.save(bankAccount);
     }//+중복확인
+    private void validateDuplicate(String keyword) {
+        List<BankAccount> bankAccountList = bankAccountRepository.findByNumberContains(keyword);
+        if (!bankAccountList.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        }
+    }
 
     //계좌 생성 보조
     private static BankAccount createBankAccount(BankAccountCreateRequest request){
@@ -55,6 +63,8 @@ public class BankAccountService {
         BankAccount findBankAccount = findById(accountId);
         findBankAccount.updatePassWord(request);
     }
+    //계좌 잔고 확인
+
     //계좌 입금
     @Transactional
     public void updateDeposit(Long accountId, BankAccountCreateRequest request){
@@ -80,7 +90,7 @@ public class BankAccountService {
     public void updateTransactionHistory(Long accountId, BankAccountCreateRequest request){
     }
 
-    //ID기반으로 계좌 찾기(소유주만)
+    //ID기반으로 계좌 찾기
     public BankAccount findById(Long accountId){
         return bankAccountRepository.findById(accountId).orElseThrow(()->new BankAccountException(ErrorCode.BANK_ACCOUNT_NOT_FOUND));
     }
