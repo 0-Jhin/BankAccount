@@ -1,0 +1,9 @@
+jwt:
+  secret: 51df4a17611c3ee2a4e1309f3ab2619b97f21217336e61675c34c10fab4d26edb511da63c2a73f1acedfd49c65213877fb86083c1d3ea57618fecda9e1e21c6e
+  redirect: http://localhost:8080/
+  access-token:
+    expiration-time: 3600000
+    header: Authorization
+  refresh-token:
+    expiration-time: 604800000
+    header: Authorization-refresh
