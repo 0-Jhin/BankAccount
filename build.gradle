@@ -70,10 +70,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	// Test
+	// Testot-starter-test'
+	//	testImplementation 'org.springframework.security:sprin
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-bog-security-test'
 }
 
 tasks.named('test') {
